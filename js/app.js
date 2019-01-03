@@ -34,6 +34,14 @@ Enemy.prototype.update = function(dt) {
   }
   //更新横向位置
   this.x += dt * this.speed;
+
+  //敌人碰撞玩家判断
+  if (player.x - this.x < 101 && player.y == this.y) {
+    //重置玩家
+    player.x = 202.5;
+    player.y = 303 + 85.5;
+  }
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -81,22 +89,22 @@ PlayerF.prototype.handleInput = function(moveType) {
 PlayerF.prototype.update = function() {
   //判断玩家是否出界
   //出左边界
-  if (this.x<0.5) {
-    this.x=0.5;
+  if (this.x < 0.5) {
+    this.x = 0.5;
   }
 
   //出右边界
-  if (this.x>404.5) {
-    this.x=404.5;
+  if (this.x > 404.5) {
+    this.x = 404.5;
   }
 
   //出下边界
-  if (this.y>388.5) {
-    this.y=388.5;
+  if (this.y > 388.5) {
+    this.y = 388.5;
   }
 
   //到达终点，重置位置
-  if (this.y<46.5) {
+  if (this.y < 46.5) {
     this.x = 202.5;
     this.y = 303 + 85.5;
   }
@@ -112,7 +120,7 @@ PlayerF.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 //初始化敌人的三种出现位置
-const initY = [60, 145, 225];
+const initY = [46.5, 132, 217.5];
 //实例化3个敌人对象
 const enemy1 = new Enemy();
 const enemy2 = new Enemy();
