@@ -9,10 +9,12 @@ var Enemy = function() {
 
   //设置敌人初始位置
   this.x = 0;
-  this.y = 60;
 
-  //设置敌人速度
-  this.speed = 200;
+  //随机取得[0-2]的下标
+  this.y = initY[Math.floor(Math.random() * 3)];
+
+  //设置敌人初始速度
+  this.speed = 100;
 };
 
 // Update the enemy's position, required method for game
@@ -22,6 +24,14 @@ Enemy.prototype.update = function(dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
+  //判断敌人是否移动出界
+  if (this.x > 505) {
+    //移动出界时，设置新的y轴位置，设置新的移动速度
+    this.x = 0;
+    this.y = initY[Math.floor(Math.random() * 3)];
+    //随机速度100-900
+    this.speed = Math.floor(Math.random() * (900 - 100 + 1) + 100);
+  }
   //更新横向位置
   return this.x += dt * this.speed;
 };
@@ -40,6 +50,8 @@ Enemy.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+//初始化敌人的三种出现位置
+const initY = [60, 145, 225];
 //实例化3个敌人对象
 const enemy1 = new Enemy();
 // const enemy2=new Enemy();
