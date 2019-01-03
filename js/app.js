@@ -61,6 +61,7 @@ var PlayerF = function() {
 
 //获取玩家输入
 PlayerF.prototype.handleInput = function(moveType) {
+
   //判断键盘输入类型
   switch (moveType) {
     case 'up':
@@ -75,12 +76,34 @@ PlayerF.prototype.handleInput = function(moveType) {
     default:
       this.x += this.moveX;
   }
+
+  //判断玩家是否出界
+  //出左边界
+  if (this.x<0.5) {
+    this.x=0.5;
+  }
+
+  //出右边界
+  if (this.x>404.5) {
+    this.x=404.5;
+  }
+
+  //出下边界
+  if (this.y>388.5) {
+    this.y=388.5;
+  }
+
+  //到达终点，重置位置
+  if (this.y<46.5) {
+    this.x = 202.5;
+    this.y = 303 + 85.5;
+  }
+
 };
 
 PlayerF.prototype.update = function() {
-  //更新玩家位置方法
-  // this.x=this.x+=this.moveX;
-  // this.y=this.y+=this.moveY;
+  //判断玩家是否出界
+
 };
 
 PlayerF.prototype.render = function() {
