@@ -10,7 +10,7 @@ var Enemy = function() {
   //设置敌人初始位置
   this.x = 0;
 
-  //随机取得[0-2]的下标
+  //随机取得[0-2]的下标，初始化敌人y轴位置
   this.y = initY[Math.floor(Math.random() * 3)];
 
   //设置敌人初始速度
@@ -33,7 +33,7 @@ Enemy.prototype.update = function(dt) {
     this.speed = Math.floor(Math.random() * (900 - 100 + 1) + 100);
   }
   //更新横向位置
-  return this.x += dt * this.speed;
+  this.x += dt * this.speed;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -45,7 +45,35 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var PlayerF= function(){
+  //设置玩家图片
+  this.sprite = 'images/char-horn-girl.png';
 
+  //设置玩家初始位置
+  this.x=202.5;
+  this.y=303+85.5;
+
+  //设置玩家横向每次运行距离
+  this.moveX=60;
+  this.moveY=60;
+
+};
+
+//获取玩家输入
+PlayerF.prototype.handleInput= function() {
+
+};
+
+PlayerF.prototype.update= function(){
+  //更新玩家位置方法
+  // this.x=this.x+=this.moveX;
+  // this.y=this.y+=this.moveY;
+};
+
+PlayerF.prototype.render= function() {
+  //渲染玩家移动后的图片
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -60,6 +88,8 @@ const enemy3 = new Enemy();
 //初始化敌人数组
 let allEnemies = [enemy1, enemy2, enemy3];
 
+//实例化玩家
+const player= new PlayerF();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
