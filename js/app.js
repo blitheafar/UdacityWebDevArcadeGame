@@ -14,7 +14,7 @@ var Enemy = function() {
   this.y = initY[Math.floor(Math.random() * 3)];
 
   //设置敌人初始速度
-  this.speed = Math.floor(Math.random() * (900 - 100 + 1) + 100);
+  this.speed = Math.floor(Math.random() * (500 - 100 + 1) + 100);
 };
 
 // Update the enemy's position, required method for game
@@ -30,13 +30,13 @@ Enemy.prototype.update = function(dt) {
     this.x = 0;
     this.y = initY[Math.floor(Math.random() * 3)];
     //随机速度100-900
-    this.speed = Math.floor(Math.random() * (900 - 100 + 1) + 100);
+    this.speed = Math.floor(Math.random() * (500 - 100 + 1) + 100);
   }
   //更新横向位置
   this.x += dt * this.speed;
 
   //敌人碰撞玩家判断
-  if (player.x - this.x < 101 && player.y == this.y) {
+  if (Math.abs(player.x - this.x) < 81 && player.y == this.y) {
     //重置玩家
     player.x = 202.5;
     player.y = 303 + 85.5;
