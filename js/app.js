@@ -76,7 +76,9 @@ PlayerF.prototype.handleInput = function(moveType) {
     default:
       this.x += this.moveX;
   }
+};
 
+PlayerF.prototype.update = function() {
   //判断玩家是否出界
   //出左边界
   if (this.x<0.5) {
@@ -98,11 +100,6 @@ PlayerF.prototype.handleInput = function(moveType) {
     this.x = 202.5;
     this.y = 303 + 85.5;
   }
-
-};
-
-PlayerF.prototype.update = function() {
-  //判断玩家是否出界
 
 };
 
