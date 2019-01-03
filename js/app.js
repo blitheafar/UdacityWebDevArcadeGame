@@ -14,7 +14,7 @@ var Enemy = function() {
   this.y = initY[Math.floor(Math.random() * 3)];
 
   //设置敌人初始速度
-  this.speed = 100;
+  this.speed = Math.floor(Math.random() * (900 - 100 + 1) + 100);
 };
 
 // Update the enemy's position, required method for game
@@ -54,11 +54,11 @@ Enemy.prototype.render = function() {
 const initY = [60, 145, 225];
 //实例化3个敌人对象
 const enemy1 = new Enemy();
-// const enemy2=new Enemy();
-// const enemy3=new Enemy();
+const enemy2 = new Enemy();
+const enemy3 = new Enemy();
 
 //初始化敌人数组
-let allEnemies = [enemy1];
+let allEnemies = [enemy1, enemy2, enemy3];
 
 
 // This listens for key presses and sends the keys to your
