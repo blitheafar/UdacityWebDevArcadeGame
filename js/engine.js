@@ -12,7 +12,8 @@
  * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
-
+ //通过一遍一遍绘制界面实现游戏移动
+//立即执行(function(global) { … })(this);
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
@@ -38,6 +39,7 @@ var Engine = (function(global) {
          * would be the same for everyone (regardless of how fast their
          * computer is) - hurray time!
          */
+         //取得时间差，秒
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
@@ -64,6 +66,7 @@ var Engine = (function(global) {
      */
     function init() {
         reset();
+        //方法返回自1970年1月1日 00:00:00 UTC到当前时间的毫秒数。
         lastTime = Date.now();
         main();
     }
@@ -90,10 +93,12 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
+      //更新敌人对象，通过循环敌人数组内的敌人，调用update()方法，update()方法应该只关心更新对象的数据或属性
         allEnemies.forEach(function(enemy) {
+          //调用Enemy内原型方法update(dt)，更新enemy实体位置
             enemy.update(dt);
         });
-        player.update();
+        //player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -102,6 +107,8 @@ var Engine = (function(global) {
      * they are flipbooks creating the illusion of animation but in reality
      * they are just drawing the entire screen over and over.
      */
+     //初始化游戏等级，将会调用renderEntities()方法，
+     //该方法会在每次时间差后调用，重复生成整个界面
     function render() {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
@@ -125,6 +132,7 @@ var Engine = (function(global) {
          * and, using the rowImages array, draw the correct image for that
          * portion of the "grid"
          */
+         //生成地形
         for (row = 0; row < numRows; row++) {
             for (col = 0; col < numCols; col++) {
                 /* The drawImage function of the canvas' context element
@@ -153,13 +161,14 @@ var Engine = (function(global) {
             enemy.render();
         });
 
-        player.render();
+        //player.render();
     }
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
+     //设置重置游戏
     function reset() {
         // noop
     }
@@ -168,6 +177,7 @@ var Engine = (function(global) {
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
+     //缓存所有图片
     Resources.load([
         'images/stone-block.png',
         'images/water-block.png',
