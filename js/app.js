@@ -45,32 +45,45 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var PlayerF= function(){
+var PlayerF = function() {
   //设置玩家图片
   this.sprite = 'images/char-horn-girl.png';
 
   //设置玩家初始位置
-  this.x=202.5;
-  this.y=303+85.5;
+  this.x = 202.5;
+  this.y = 303 + 85.5;
 
   //设置玩家横向每次运行距离
-  this.moveX=60;
-  this.moveY=60;
+  this.moveX = 101;
+  this.moveY = 85.5;
 
 };
 
 //获取玩家输入
-PlayerF.prototype.handleInput= function() {
-
+PlayerF.prototype.handleInput = function(moveType) {
+  //判断键盘输入类型
+  switch (moveType) {
+    case 'up':
+      this.y -= this.moveY;
+      break;
+    case 'down':
+      this.y += this.moveY;
+      break;
+    case 'left':
+      this.x -= this.moveX;
+      break;
+    default:
+      this.x += this.moveX;
+  }
 };
 
-PlayerF.prototype.update= function(){
+PlayerF.prototype.update = function() {
   //更新玩家位置方法
   // this.x=this.x+=this.moveX;
   // this.y=this.y+=this.moveY;
 };
 
-PlayerF.prototype.render= function() {
+PlayerF.prototype.render = function() {
   //渲染玩家移动后的图片
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -89,7 +102,7 @@ const enemy3 = new Enemy();
 let allEnemies = [enemy1, enemy2, enemy3];
 
 //实例化玩家
-const player= new PlayerF();
+const player = new PlayerF();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
