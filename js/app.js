@@ -41,7 +41,6 @@ Enemy.prototype.update = function(dt) {
     player.x = 202.5;
     player.y = 303 + 85.5;
   }
-
 };
 
 // Draw the enemy on the screen, required method for game
@@ -64,12 +63,10 @@ var PlayerF = function() {
   //设置玩家横向每次运行距离
   this.moveX = 101;
   this.moveY = 85.5;
-
 };
 
 //获取玩家输入
 PlayerF.prototype.handleInput = function(moveType) {
-
   //判断键盘输入类型
   switch (moveType) {
     case 'up':
@@ -107,6 +104,9 @@ PlayerF.prototype.update = function() {
   if (this.y < 46.5) {
     this.x = 202.5;
     this.y = 303 + 85.5;
+    setTimeout(function() {
+      alert("游戏胜利！");
+    },100);
   }
 
 };
